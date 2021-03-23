@@ -10,6 +10,23 @@ public class TempControllerTest {
 	@GetMapping("/temp/home")
 	public String tempHome() {
 		System.out.println("tempHome()");
-		return "home.html";
+		// 파일리턴 기본 경로 : src/main/resources/static
+		// 리턴명 : home.html
+		// 풀경로 : src/main/resouces/static/home.html
+		return "/home.html";
+	}
+	
+	@GetMapping("temp/img")
+	public String templmg() {
+		return "/a.png";
+	}
+	
+	@GetMapping("temp/jsp")
+	public String tempJsp() {
+		//prefix : /WEB-INF/views/
+		//suffix : .jsp
+		// 풀네임 : /WEB-INF/views//test.jsp.jsp
+		
+		return "test";
 	}
 }
