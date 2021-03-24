@@ -43,7 +43,7 @@ public class Board {
 	@ColumnDefault("0")
 	private int count; 			// 조회수
 	
-	@ManyToOne(fetch = FetchType.EAGER)					//Many : Board, One : User , 연관 관계 맺어줌
+	@ManyToOne(fetch = FetchType.EAGER)	//Many : Board, One : User , 연관 관계 맺어줌
 	@JoinColumn(name="user_id")
 	private User user;		//DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.  => 충돌
 												// 자바 프로그램에서 데이터베이스의 자료형에 맞춰서 테이블을 만듬, But, ORM 사용시 오브젝트 사용 가능

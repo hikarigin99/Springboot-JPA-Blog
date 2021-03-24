@@ -24,14 +24,14 @@ import lombok.NoArgsConstructor;
 @Entity	// 클래스를 테이블화시키는 어노테이션, User 클래스가 자동으로 MySQL에 테이블이 생성됨
 public class User {
 	
-	@Id																													//Primary key
+	@Id		//Primary key
 	@GeneratedValue(strategy  = GenerationType.IDENTITY)	// 넘버링 전략, 해당 프로젝트에서 연결된 DB의 넘버링 전략(IDENTITY)을 따라간다.
-	private int id;																							// 오라클 : 시퀀스, MySQL : auto_increment로 넘버링
+	private int id;	// 오라클 : 시퀀스, MySQL : auto_increment로 넘버링
 	
 	@Column(nullable = false, length=30)
 	private String userName;	//아이디
 	
-	@Column(nullable = false, length=100)											// 123456 => 해쉬 (비밀번호 암호화)
+	@Column(nullable = false, length=100)	// 123456 => 해쉬 (비밀번호 암호화)
 	private String password;
 	
 	@Column(nullable = false, length = 50)
@@ -39,10 +39,10 @@ public class User {
 	
 	
 	@ColumnDefault("'user'")
-	private String role;												// 어떤 데이터의 도메인(범위)을 만들 수 있는 Enum 을 쓰는게 좋다. 
-																						// admin, user, manager 권한을 주는 role (에러 위험 managerrrrr)
+	private String role;	// 어떤 데이터의 도메인(범위)을 만들 수 있는 Enum 을 쓰는게 좋다. 
+											// admin, user, manager 권한을 주는 role (에러 위험 managerrrrr)
 	
-	@CreationTimestamp											// 시간이 자동입력
-	private Timestamp createDate;						// 회원가입한 시간
+	@CreationTimestamp	// 시간이 자동입력
+	private Timestamp createDate;	// 회원가입한 시간
 	
 }
