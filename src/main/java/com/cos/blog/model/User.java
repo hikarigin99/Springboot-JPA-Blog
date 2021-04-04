@@ -1,7 +1,6 @@
 package com.cos.blog.model;
 
 import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,14 +30,14 @@ public class User {
 	@GeneratedValue(strategy  = GenerationType.IDENTITY)	// 넘버링 전략, 해당 프로젝트에서 연결된 DB의 넘버링 전략(IDENTITY)을 따라간다.
 	private int id;	// 오라클 : 시퀀스, MySQL : auto_increment로 넘버링
 	
-	@Column(nullable = false, length=30, unique = true)
+	@Column(nullable = false, length=100, unique = true)
 	private String username;	//아이디
 	
 	@Column(nullable = false, length=100)	// 123456 => 해쉬 (비밀번호 암호화)
 	private String password;
 	
 	@Column(nullable = false, length = 50)
-	private String email;
+	private String email;  // myEmail, my_email
 	
 	// @ColumnDefault("user")
 	// DB는 RoleType이라는게 없다.
@@ -46,7 +45,10 @@ public class User {
 	private RoleType role;	// 어떤 데이터의 도메인(범위)을 만들 수 있는 Enum 을 쓰는게 좋다. 
 											// ADMIN, USER 강제 권한을 주는 role (에러 위험 managerrrrr)
 	
+	private String oauth; // kakao, google
+	
+	// 내가 직접 시간을 넣으려면 Timestamp.valueOf(LocalDateTime.now())
 	@CreationTimestamp	// 시간이 자동입력
-	private Timestamp createDate;	// 회원가입한 시간
+	private Timestamp createDate;
 	
 }

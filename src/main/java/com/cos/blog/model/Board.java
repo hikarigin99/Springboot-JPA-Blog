@@ -1,8 +1,9 @@
 package com.cos.blog.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,14 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @NoArgsConstructor
@@ -47,9 +50,11 @@ public class Board {
 												// 자바 프로그램에서 데이터베이스의 자료형에 맞춰서 테이블을 만듬, But, ORM 사용시 오브젝트 사용 가능
 	
 	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)  // mayppedBy 연관관계의 주인X(FKey X), DB에 컬럼 생성X
-	private List<Reply> reply;
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)  // mayppedBy 연관관계의 주인X(FKey X), DB에 컬럼 생성X
+	@JsonIgnoreProperties({"board"})
+	@OrderBy("id desc")
+	private List<Reply> replys;
 	
 	@CreationTimestamp
-	private Timestamp createDate;
+	private LocalDateTime createDate;
 }
